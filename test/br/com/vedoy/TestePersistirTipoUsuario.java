@@ -34,9 +34,9 @@ public class TestePersistirTipoUsuario {
         boolean exception = false;
         try {
             Categorias obj = new Categorias();
-            obj.setNome("Hidraulico");
-            obj.setDescricao("Serviços e mão de obra hidraulica");
-            obj.setSigla("HID");
+            obj.setNome("Eletronico");
+            obj.setDescricao("Serviços e mão de obra eletronica");
+            obj.setSigla("ELT");
             em.getTransaction().begin();
             em.persist(obj);
             em.getTransaction().commit();

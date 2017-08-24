@@ -79,7 +79,7 @@ public class Ordem_Servicos implements Serializable{
             uniqueConstraints = {
                 @UniqueConstraint(
                         name = "UK_os_sintomas",
-                        columnNames = {"os", "sintoma"})})
+                        columnNames = {"ORDEM_SERVICOS", "SINTOMAS"})})
     private List<Sintomas> os_sintomas = new ArrayList<>();
     
    @ManyToMany
@@ -91,7 +91,7 @@ public class Ordem_Servicos implements Serializable{
             uniqueConstraints = {
                 @UniqueConstraint(
                         name = "UK_os_causas",
-                        columnNames = {"os", "causa"})})
+                        columnNames = {"ORDEM_SERVICOS", "CAUSAS"})})
     private List<Causas> os_causas = new ArrayList<>();
 
     public Ordem_Servicos() {
