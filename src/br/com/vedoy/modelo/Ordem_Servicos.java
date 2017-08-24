@@ -6,7 +6,9 @@
 package br.com.vedoy.modelo;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ForeignKey;
@@ -14,10 +16,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -62,14 +67,32 @@ public class Ordem_Servicos implements Serializable{
     @Temporal(TemporalType.DATE)
     @Column(name = "fim", nullable = false)
     private Calendar fim;
-    @ManyToOne
-    @JoinColumn(name = "id_causa")
-    private Causas causa;
-    @ManyToOne
-    @JoinColumn(name = "id_sintoma")
-    private Sintomas sintoma;
     @Column(name = "observacoes", columnDefinition = "text")
     private String Observacoes;
+    
+    @ManyToMany
+    @JoinTable(name = "os_sintomas",
+            joinColumns
+            = @JoinColumn(name = "ordem_servicos", referencedColumnName = "id_os", nullable = false),
+            inverseJoinColumns
+            = @JoinColumn(name = "sintomas", referencedColumnName = "nome", nullable = false),
+            uniqueConstraints = {
+                @UniqueConstraint(
+                        name = "UK_os_sintomas",
+                        columnNames = {"os", "sintoma"})})
+    private List<Sintomas> os_sintomas = new ArrayList<>();
+    
+   @ManyToMany
+    @JoinTable(name = "os_causas",
+            joinColumns
+            = @JoinColumn(name = "ordem_servicos", referencedColumnName = "id_os", nullable = false),
+            inverseJoinColumns
+            = @JoinColumn(name = "causas", referencedColumnName = "nome", nullable = false),
+            uniqueConstraints = {
+                @UniqueConstraint(
+                        name = "UK_os_causas",
+                        columnNames = {"os", "causa"})})
+    private List<Causas> os_causas = new ArrayList<>();
 
     public Ordem_Servicos() {
     }
@@ -122,8 +145,21 @@ public class Ordem_Servicos implements Serializable{
         this.status = status;
     }
 
-   
+    public Usuarios getCliente() {
+        return cliente;
+    }
 
+    public void setCliente(Usuarios cliente) {
+        this.cliente = cliente;
+    }
+
+    public Usuarios getTecnico() {
+        return tecnico;
+    }
+
+    public void setTecnico(Usuarios tecnico) {
+        this.tecnico = tecnico;
+    }
 
     public Calendar getInicio() {
         return inicio;
@@ -141,22 +177,6 @@ public class Ordem_Servicos implements Serializable{
         this.fim = fim;
     }
 
-    public Causas getCausa() {
-        return causa;
-    }
-
-    public void setCausa(Causas causa) {
-        this.causa = causa;
-    }
-
-    public Sintomas getSintoma() {
-        return sintoma;
-    }
-
-    public void setSintoma(Sintomas sintoma) {
-        this.sintoma = sintoma;
-    }
-
     public String getObservacoes() {
         return Observacoes;
     }
@@ -165,9 +185,49 @@ public class Ordem_Servicos implements Serializable{
         this.Observacoes = Observacoes;
     }
 
+    public List<Sintomas> getOs_sintomas() {
+        return os_sintomas;
+    }
+
+    public void setOs_sintomas(List<Sintomas> os_sintomas) {
+        this.os_sintomas = os_sintomas;
+    }
+
+    public List<Causas> getOs_causas() {
+        return os_causas;
+    }
+
+    public void setOs_causas(List<Causas> os_causas) {
+        this.os_causas = os_causas;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 89 * hash + this.id_os;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Ordem_Servicos other = (Ordem_Servicos) obj;
+        if (this.id_os != other.id_os) {
+            return false;
+        }
+        return true;
+    }
     
     
-    
-    
+   
+   
     
 }
