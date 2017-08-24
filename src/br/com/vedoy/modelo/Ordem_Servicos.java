@@ -225,9 +225,5 @@ public class Ordem_Servicos implements Serializable{
         }
         return true;
     }
-    
-    
    
-   
-    
 }
