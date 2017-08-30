@@ -67,12 +67,13 @@ public class Causas implements Serializable{
         this.sigla = sigla;
     }
 
-    public int getId_causa() {
+    public Integer getId_causa() {
         return id_causa;
     }
 
-    public void setId_causa(int id_causa) {
+    public void setId_causa(Integer id_causa) {
         this.id_causa = id_causa;
     }
-    
+
+  
 }

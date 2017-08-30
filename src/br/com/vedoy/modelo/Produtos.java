@@ -45,11 +45,11 @@ public class Produtos implements Serializable{
         
     }
 
-    public int getId_prod() {
+    public Integer getId_prod() {
         return id_prod;
     }
 
-    public void setId_prod(int id_prod) {
+    public void setId_prod(Integer id_prod) {
         this.id_prod = id_prod;
     }
 

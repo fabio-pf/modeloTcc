@@ -97,11 +97,11 @@ public class Ordem_Servicos implements Serializable{
     public Ordem_Servicos() {
     }
 
-    public int getId_os() {
+    public Integer getId_os() {
         return id_os;
     }
 
-    public void setId_os(int id_os) {
+    public void setId_os(Integer id_os) {
         this.id_os = id_os;
     }
 

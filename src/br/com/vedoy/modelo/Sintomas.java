@@ -43,11 +43,11 @@ public class Sintomas implements Serializable{
         
     }
     
-    public int getId_sint() {
+    public Integer getId_sint() {
         return id_sint;
     }
 
-    public void setId_sint(int id_sint) {
+    public void setId_sint(Integer id_sint) {
         this.id_sint = id_sint;
     }
 
