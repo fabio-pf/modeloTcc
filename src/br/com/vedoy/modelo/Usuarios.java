@@ -36,7 +36,7 @@ public abstract class Usuarios implements Serializable{
     @Id
     @SequenceGenerator(name = "seq_usuario", sequenceName = "seq_usuario_id", allocationSize = 1)
     @GeneratedValue(generator = "seq_usuario", strategy = GenerationType.SEQUENCE)
-    private int id;
+    private Integer id;
     private String usuario;
     private String senha;
     @ManyToMany

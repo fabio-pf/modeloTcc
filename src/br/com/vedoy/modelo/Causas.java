@@ -25,7 +25,7 @@ public class Causas implements Serializable{
     @Id
     @SequenceGenerator(name = "seq_causas", sequenceName = "seq_causas_id", allocationSize = 1)
     @GeneratedValue(generator = "seq_causas", strategy = GenerationType.SEQUENCE)
-    private int id_causa;
+    private Integer id_causa;
     @NotBlank(message = "O nome deve ser informado")
     @Length(max = 100, message = "O nome não deve ter mais que {max} caracteres")
     @Column(name = "nome",length = 100, nullable = false)

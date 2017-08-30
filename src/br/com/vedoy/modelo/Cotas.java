@@ -24,7 +24,7 @@ public class Cotas implements Serializable{
     @Id
     @SequenceGenerator(name = "seq_cotas", sequenceName = "seq_cotas_id", allocationSize = 1)
     @GeneratedValue(generator = "seq_cotas", strategy = GenerationType.SEQUENCE)
-    private int id;
+    private Integer id;
     private int cota;
 
     public Cotas() {

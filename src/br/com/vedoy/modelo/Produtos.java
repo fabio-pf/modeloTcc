@@ -27,7 +27,7 @@ public class Produtos implements Serializable{
     @Id
     @SequenceGenerator(name = "seq_produto", sequenceName = "seq_produto_id", allocationSize = 1)
     @GeneratedValue(generator = "seq_produto", strategy = GenerationType.SEQUENCE)
-    private int id_prod;
+    private Integer id_prod;
     @NotBlank(message = "O nome deve ser informada")
     @Length(max = 40, message = "O nome não deve ter mais que {max} caracteres")
     @Column(name = "nome",length = 40, nullable = false)

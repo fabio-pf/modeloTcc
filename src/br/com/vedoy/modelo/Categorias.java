@@ -25,7 +25,7 @@ public class Categorias implements Serializable{
     @Id
     @SequenceGenerator(name = "seq_categoria", sequenceName = "seq_categoria_id", allocationSize = 1)
     @GeneratedValue(generator = "seq_categoria", strategy = GenerationType.SEQUENCE)
-    private int id;
+    private Integer id;
     @NotBlank(message = "O nome deve ser informado")
     @Length(max = 100, message = "O nome não deve ter mais que {max} caracteres")
     @Column(name = "nome",length = 100, nullable = false)

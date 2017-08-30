@@ -36,7 +36,7 @@ public class Ordem_Servicos implements Serializable{
     @Id
     @SequenceGenerator(name = "seq_os", sequenceName = "seq_os_id", allocationSize = 1)
     @GeneratedValue(generator = "seq_os", strategy = GenerationType.SEQUENCE)
-    private int id_os;
+    private Integer id_os;
     @NotNull(message = "O tipo não pode ser nulo")
     @ManyToOne
     @JoinColumn(name = "tipoOS")

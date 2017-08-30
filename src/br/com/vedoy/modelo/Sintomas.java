@@ -25,7 +25,7 @@ public class Sintomas implements Serializable{
     @Id
     @SequenceGenerator(name = "seq_sintomas", sequenceName = "seq_sintomas_id", allocationSize = 1)
     @GeneratedValue(generator = "seq_sintomas", strategy = GenerationType.SEQUENCE)
-    private int id_sint;
+    private Integer id_sint;
     @NotBlank(message = "O nome deve ser informada")
     @Length(max = 100, message = "O nome não deve ter mais que {max} caracteres")
     @Column(name = "nome",length = 100, nullable = false)
