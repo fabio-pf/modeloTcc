@@ -6,12 +6,8 @@
 package br.com.vedoy;
 
 import br.com.vedoy.modelo.Categorias;
-import br.com.vedoy.modelo.Clientes;
-import br.com.vedoy.modelo.Cotas;
-import br.com.vedoy.modelo.Pessoas;
 import br.com.vedoy.modelo.Tecnicos;
 import br.com.vedoy.modelo.Tipo_Usuario;
-import br.com.vedoy.modelo.Usuarios;
 import java.util.Calendar;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
