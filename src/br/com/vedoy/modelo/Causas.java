@@ -38,7 +38,6 @@ public class Causas implements Serializable{
     @Length(max = 200, message = "A descrição não deve ter mais que {max} caracteres")
     @Column(name = "descricao",length = 200, nullable = false) 
     private String descricao;
-    private Boolean principal;
 
     public Causas() {
         
@@ -76,13 +75,5 @@ public class Causas implements Serializable{
         this.id_causa = id_causa;
     }
 
-    public Boolean getPrincipal() {
-        return principal;
-    }
 
-    public void setPrincipal(Boolean principal) {
-        this.principal = principal;
-    }
-
-  
 }
