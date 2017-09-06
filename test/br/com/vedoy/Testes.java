@@ -62,7 +62,6 @@ public class Testes {
             obj.setEmail("fabio.vedoy@hotmail.com");
             obj.setT_celular("54-991169397");
             obj.setCategoria(em.find(Categorias.class, 1));
-            obj.setCota(em.find(Cotas.class, 6));
             Tipo_Usuario t = em.find(Tipo_Usuario.class, "ADMINISTRADOR");
             obj.getTipos_usuario().add(t);
             em.getTransaction().begin();

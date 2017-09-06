@@ -38,6 +38,8 @@ public class Categorias implements Serializable{
     @Length(max = 200, message = "A descrição não deve ter mais que {max} caracteres")
     @Column(name = "descricao",length = 200, nullable = false) 
     private String descricao;
+    @Column(name = "cota", nullable = false) 
+    private Integer cota;
 
     public Categorias() {}
 
@@ -65,6 +67,8 @@ public class Categorias implements Serializable{
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
+    
+    
 
     @Override
     public int hashCode() {
@@ -97,6 +101,14 @@ public class Categorias implements Serializable{
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Integer getCota() {
+        return cota;
+    }
+
+    public void setCota(Integer cota) {
+        this.cota = cota;
     }
 
 }

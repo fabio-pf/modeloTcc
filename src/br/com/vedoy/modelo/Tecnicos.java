@@ -23,22 +23,11 @@ public class Tecnicos  extends Pessoas implements Serializable{
     
     
     @ManyToOne
-    @JoinColumn(name = "cota")
-    private Cotas cota;
-    @ManyToOne
     @JoinColumn(name = "categoria" )
     private Categorias categoria;
 
     public Tecnicos() {
         super();
-    }
-
-    public Cotas getCota() {
-        return cota;
-    }
-
-    public void setCota(Cotas cota) {
-        this.cota = cota;
     }
 
     public Categorias getCategoria() {
