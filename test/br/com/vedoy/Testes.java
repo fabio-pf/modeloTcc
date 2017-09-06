@@ -47,8 +47,8 @@ public class Testes {
         boolean exception = false;
         try {
             Tecnicos obj = new Tecnicos();
-            obj.setNome("Joao Machado");
-            obj.setUsuario("joao.m");
+            obj.setNome("Fabio Vedoy");
+            obj.setUsuario("fabio.vedoy");
             obj.setSenha("123");
             obj.setEndereco("Rua Silveira Martins, 141");
             obj.setCidade("Passo Fundo");
@@ -57,7 +57,7 @@ public class Testes {
             obj.setNascimento(Calendar.getInstance());
             obj.setEmail("fabio.vedoy@hotmail.com");
             obj.setT_celular("54-991169397");
-            obj.setCategoria(em.find(Categorias.class, 1));
+            obj.setCategoria(em.find(Categorias.class, 4)); //acima de dois
             Tipo_Usuario t = em.find(Tipo_Usuario.class, "ADMINISTRADOR");
             obj.getTipos_usuario().add(t);
             em.getTransaction().begin();
