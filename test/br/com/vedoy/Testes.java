@@ -47,8 +47,8 @@ public class Testes {
         boolean exception = false;
         try {
             Tecnicos obj = new Tecnicos();
-            obj.setNome("Fabio Vedoy");
-            obj.setUsuario("fabio.vedoy");
+            obj.setNome("Joao Silva");
+            obj.setUsuario("joao.silva");
             obj.setSenha("123");
             obj.setEndereco("Rua Silveira Martins, 141");
             obj.setCidade("Passo Fundo");

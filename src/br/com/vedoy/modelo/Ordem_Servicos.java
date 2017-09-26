@@ -76,6 +76,7 @@ public class Ordem_Servicos implements Serializable{
             = @JoinColumn(name = "ordem_servicos", referencedColumnName = "id_os", nullable = false),
             inverseJoinColumns
             = @JoinColumn(name = "sintomas", referencedColumnName = "nome", nullable = false),
+            
             uniqueConstraints = {
                 @UniqueConstraint(
                         name = "UK_os_sintomas",
