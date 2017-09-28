@@ -47,8 +47,8 @@ public class Testes {
         boolean exception = false;
         try {
             Tecnicos obj = new Tecnicos();
-            obj.setNome("Joao Silva");
-            obj.setUsuario("joao.silva");
+            obj.setNome("Joao Silva 2");
+            obj.setUsuario("joao.silva2");
             obj.setSenha("123");
             obj.setEndereco("Rua Silveira Martins, 141");
             obj.setCidade("Passo Fundo");
@@ -57,16 +57,20 @@ public class Testes {
             obj.setNascimento(Calendar.getInstance());
             obj.setEmail("fabio.vedoy@hotmail.com");
             obj.setT_celular("54-991169397");
-            obj.setCategoria(em.find(Categorias.class, 4)); //acima de dois
-            Tipo_Usuario t = em.find(Tipo_Usuario.class, "ADMINISTRADOR");
-            obj.getTipos_usuario().add(t);
-            em.getTransaction().begin();
-            em.persist(obj);
-            em.getTransaction().commit();
+//            obj.setCategoria(em.find(Categorias.class, 4)); //acima de dois
+            obj.setCategoria(new Categorias()); //acima de dois
+//            Tipo_Usuario t = em.find(Tipo_Usuario.class, "ADMINISTRADOR");
+//            obj.getTipos_usuario().add(t);
+//            em.getTransaction().begin();
+//            em.persist(obj);
+//            em.getTransaction().commit();
+            
+            System.out.println("Tecnico: "+obj.getClass().getSuperclass().getSuperclass().getSimpleName());
+            System.out.println("Categoria: "+obj.getCategoria().getClass().getSuperclass().getSuperclass().getSimpleName());
         } catch (Exception e) {
             e.printStackTrace();
             exception = true;
-            
+            System.out.println("Erro\n"+e);
         }
         // verificando se o resultado é igual ao esperado
         Assert.assertEquals(false, exception);
