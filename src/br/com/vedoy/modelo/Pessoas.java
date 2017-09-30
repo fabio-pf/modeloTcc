@@ -34,8 +34,8 @@ public abstract class Pessoas extends Usuarios implements Serializable {
     @Column(name = "cidade",length = 40, nullable = false) 
     private String cidade;
     @NotBlank(message = "O CPF deve ser informado")
-    @Length(max = 11, message = "O CPF não deve ter mais que {max} caracteres")
-    @Column(name = "cpf",length = 11, nullable = false) 
+    @Length(max = 14, message = "O CPF não deve ter mais que {max} caracteres")
+    @Column(name = "cpf",length = 14, nullable = false) 
     private String cpf;
     @NotBlank(message = "O RG deve ser informado")
     @Length(max = 12, message = "O RG não deve ter mais que {max} caracteres")
