@@ -69,6 +69,12 @@ public class Ordem_Servicos implements Serializable{
     private Calendar fim;
     @Column(name = "observacoes", columnDefinition = "text")
     private String Observacoes;
+    @ManyToOne
+    @JoinColumn(name = "causaPrincipal")    
+    private Causas causaPrincipal;
+    @ManyToOne
+    @JoinColumn(name = "sintomaPrincipal")    
+    private Sintomas sintomaPrincipal;
     
     @ManyToMany
     @JoinTable(name = "os_sintomas",
@@ -201,6 +207,7 @@ public class Ordem_Servicos implements Serializable{
     public void setOs_causas(List<Causas> os_causas) {
         this.os_causas = os_causas;
     }
+    
 
     @Override
     public int hashCode() {
@@ -225,6 +232,22 @@ public class Ordem_Servicos implements Serializable{
             return false;
         }
         return true;
+    }
+
+    public Causas getCausaPrincipal() {
+        return causaPrincipal;
+    }
+
+    public void setCausaPrincipal(Causas causaPrincipal) {
+        this.causaPrincipal = causaPrincipal;
+    }
+
+    public Sintomas getSintomaPrincipal() {
+        return sintomaPrincipal;
+    }
+
+    public void setSintomaPrincipal(Sintomas sintomaPrincipal) {
+        this.sintomaPrincipal = sintomaPrincipal;
     }
    
 }

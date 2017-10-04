@@ -9,17 +9,21 @@ import java.io.Serializable;
 import java.util.Calendar;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.br.CPF;
 
 /**
  *
  * @author Fabio V
  */
 @Entity
-public abstract class Pessoas extends Usuarios implements Serializable {
+public class Pessoas extends Usuarios implements Serializable{
     
     @NotBlank(message = "O nome deve ser informada")
     @Length(max = 100, message = "O nome não deve ter mais que {max} caracteres")
@@ -34,6 +38,7 @@ public abstract class Pessoas extends Usuarios implements Serializable {
     @Column(name = "cidade",length = 40, nullable = false) 
     private String cidade;
     @NotBlank(message = "O CPF deve ser informado")
+    @CPF(message = "O cpf deve ser valido")
     @Length(max = 14, message = "O CPF não deve ter mais que {max} caracteres")
     @Column(name = "cpf",length = 14, nullable = false) 
     private String cpf;
@@ -48,15 +53,17 @@ public abstract class Pessoas extends Usuarios implements Serializable {
     @Length(max = 80, message = "email não deve ter mais que {max} caracteres")
     @Column(name = "email",length = 80, nullable = false) 
     private String email;
-    @NotBlank(message = "O telefone deve ser informada")
-    @Length(max = 12, message = "A descrição não deve ter mais que {max} caracteres")
-    @Column(name = "T_celular",length = 12, nullable = false) 
+    @NotBlank(message = "O telefone deve ser informado")
+    @Length(max = 14, message = "O telefone não deve ter mais que {max} caracteres")
+    @Column(name = "T_celular",length = 14, nullable = false) 
     private String T_celular;
+    @Length(max = 14, message = "O telefone não deve ter mais que {max} caracteres")
+    @Column(name = "T_Fixo",length = 14) 
     private String T_fixo;
-
-    public Pessoas() { 
-        super();
-    }
+    @ManyToOne
+    @JoinColumn(name = "categorias", referencedColumnName = "id",
+            foreignKey = @ForeignKey(name = "fk_tecnico_categoria"))
+    private Categorias categoria;
 
     public String getNome() {
         return nome;
@@ -129,10 +136,17 @@ public abstract class Pessoas extends Usuarios implements Serializable {
     public void setT_fixo(String T_fixo) {
         this.T_fixo = T_fixo;
     }
+
+    public Categorias getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categorias categoria) {
+        this.categoria = categoria;
+    }
     
     
 
     
     
-  
 }

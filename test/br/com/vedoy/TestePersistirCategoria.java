@@ -1,7 +1,6 @@
 package br.com.vedoy;
 
 import br.com.vedoy.modelo.Categorias;
-import br.com.vedoy.modelo.Tipo_Usuario;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -10,13 +9,13 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-public class TestePersistirTipoUsuario {
+public class TestePersistirCategoria {
     
   EntityManagerFactory emf;
     EntityManager em;
     
 
-    public TestePersistirTipoUsuario() {
+    public TestePersistirCategoria() {
 
     }
 
@@ -34,9 +33,11 @@ public class TestePersistirTipoUsuario {
     public void testePersistirTipoUsuario() {
         boolean exception = false;
         try {
-            Tipo_Usuario obj = new Tipo_Usuario();
-            obj.setNome("TECNICO");
-            obj.setDescricao("Acesso Parcial");
+            Categorias obj = new Categorias();
+            obj.setNome("Eletrico");
+            obj.setDescricao("Serviço Eletrico");
+            obj.setSigla("ELE");
+            obj.setCota(5);
             em.getTransaction().begin();
             em.persist(obj);
             em.getTransaction().commit();

@@ -7,12 +7,10 @@ package br.com.vedoy.modelo;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import javax.persistence.DiscriminatorColumn;
-import javax.persistence.DiscriminatorType;
-import javax.persistence.DiscriminatorValue;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -21,39 +19,46 @@ import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.NotNull;
 
 /**
  *
  * @author Fabio V
  */
 @Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "tipo", length = 3, discriminatorType = DiscriminatorType.STRING)
-public abstract class Usuarios implements Serializable{
-   
+@Inheritance(strategy = InheritanceType.JOINED)
+public class Usuarios implements Serializable {
+
     @Id
     @SequenceGenerator(name = "seq_usuario", sequenceName = "seq_usuario_id", allocationSize = 1)
     @GeneratedValue(generator = "seq_usuario", strategy = GenerationType.SEQUENCE)
+    @Column(name = "id")
     private Integer id;
+    @NotNull(message = "O nome deve ser informado")
+    @Column(name = "usuario")
     private String usuario;
+    @NotNull(message = "A senha deve ser informada")
     private String senha;
+    @NotNull(message = "A senha deve ser informada")
+    @ManyToOne
+    @JoinColumn(name = "tipo_usuario", referencedColumnName = "nome",
+            foreignKey = @ForeignKey(name = "fk_usuario_tipo"))
+    private Tipo_Usuario tipo;
+    
     @ManyToMany
     @JoinTable(name = "tipos_usuario",
             joinColumns
-            = @JoinColumn(name = "usuario", referencedColumnName = "usuario", nullable = false),
+            = @JoinColumn(name = "usuarios", referencedColumnName = "usuario", nullable = false),
             inverseJoinColumns
             = @JoinColumn(name = "tipo_usuario", referencedColumnName = "nome", nullable = false),
             uniqueConstraints = {
                 @UniqueConstraint(
                         name = "UK_tipos_usuarios",
-                        columnNames = {"usuario", "tipo_usuario"})})
+                        columnNames = {"usuarios", "tipo_usuario"})})
     private List<Tipo_Usuario> tipos_usuario = new ArrayList<>();
-        
-    public Usuarios() {
-       
-    }
 
     public Integer getId() {
         return id;
@@ -87,7 +92,13 @@ public abstract class Usuarios implements Serializable{
         this.tipos_usuario = tipos_usuario;
     }
 
-    
-    
+    public Tipo_Usuario getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(Tipo_Usuario tipo) {
+        this.tipo = tipo;
+    }
+
     
 }
