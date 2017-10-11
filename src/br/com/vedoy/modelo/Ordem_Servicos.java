@@ -11,7 +11,6 @@ import java.util.Calendar;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -24,7 +23,6 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
-import org.hibernate.validator.constraints.NotBlank;
 
 /**
  *
@@ -39,10 +37,9 @@ public class Ordem_Servicos implements Serializable{
     private Integer id_os;
     @NotNull(message = "O tipo não pode ser nulo")
     @ManyToOne
-    @JoinColumn(name = "tipoOS")
+    @JoinColumn(name = "tipo_OS")
     private Categorias tipo;
     @NotNull(message = "A descrição não pode ser nula")
-    @NotBlank(message = "A descrição não pode ser em branco")
     @Column(name = "descricao", nullable = false, columnDefinition = "text")
     private String descricao_servico;
     @NotNull(message = "O produto não pode ser nulo")
@@ -51,28 +48,35 @@ public class Ordem_Servicos implements Serializable{
     private Produtos produto;
     @NotNull(message = "A prioridade deve ser definida")
     private int prioridade;
-    @NotNull(message = "O status deve ser definido")
+    
     private boolean status;
     @ManyToOne
+    @NotNull(message = "Cliente não pode ser nulo")
     @JoinColumn(name = "id_clientes")    
     private Usuarios cliente;
     @ManyToOne
+    @NotNull(message = "Técnico não pode ser nulo")
     @JoinColumn(name = "id_tecnico")    
     private Usuarios tecnico;
+    @ManyToOne
+    @NotNull(message = "Atendente não pode ser nulo")
+    @JoinColumn(name = "id_atendente")    
+    private Usuarios atendente;
     @NotNull(message = "Data de início não pode ser nula")
     @Temporal(TemporalType.DATE)
     @Column(name = "inicio", nullable = false)
     private Calendar inicio;
-    @NotNull(message = "Data de fim não pode ser nula")
     @Temporal(TemporalType.DATE)
-    @Column(name = "fim", nullable = false)
+    @Column(name = "fim")
     private Calendar fim;
     @Column(name = "observacoes", columnDefinition = "text")
     private String Observacoes;
     @ManyToOne
+    @NotNull(message = "Causa Principal não pode ser nula")
     @JoinColumn(name = "causaPrincipal")    
     private Causas causaPrincipal;
     @ManyToOne
+    @NotNull(message = "Sintoma não pode ser nulo")
     @JoinColumn(name = "sintomaPrincipal")    
     private Sintomas sintomaPrincipal;
     
@@ -168,6 +172,14 @@ public class Ordem_Servicos implements Serializable{
         this.tecnico = tecnico;
     }
 
+    public Usuarios getAtendente() {
+        return atendente;
+    }
+
+    public void setAtendente(Usuarios atendente) {
+        this.atendente = atendente;
+    }
+
     public Calendar getInicio() {
         return inicio;
     }
@@ -192,48 +204,6 @@ public class Ordem_Servicos implements Serializable{
         this.Observacoes = Observacoes;
     }
 
-    public List<Sintomas> getOs_sintomas() {
-        return os_sintomas;
-    }
-
-    public void setOs_sintomas(List<Sintomas> os_sintomas) {
-        this.os_sintomas = os_sintomas;
-    }
-
-    public List<Causas> getOs_causas() {
-        return os_causas;
-    }
-
-    public void setOs_causas(List<Causas> os_causas) {
-        this.os_causas = os_causas;
-    }
-    
-
-    @Override
-    public int hashCode() {
-        int hash = 5;
-        hash = 89 * hash + this.id_os;
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Ordem_Servicos other = (Ordem_Servicos) obj;
-        if (this.id_os != other.id_os) {
-            return false;
-        }
-        return true;
-    }
-
     public Causas getCausaPrincipal() {
         return causaPrincipal;
     }
@@ -249,5 +219,23 @@ public class Ordem_Servicos implements Serializable{
     public void setSintomaPrincipal(Sintomas sintomaPrincipal) {
         this.sintomaPrincipal = sintomaPrincipal;
     }
+
+    public List<Sintomas> getOs_sintomas() {
+        return os_sintomas;
+    }
+
+    public void setOs_sintomas(List<Sintomas> os_sintomas) {
+        this.os_sintomas = os_sintomas;
+    }
+
+    public List<Causas> getOs_causas() {
+        return os_causas;
+    }
+
+    public void setOs_causas(List<Causas> os_causas) {
+        this.os_causas = os_causas;
+    }
+
+    
    
 }
