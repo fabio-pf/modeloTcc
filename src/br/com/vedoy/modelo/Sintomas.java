@@ -28,7 +28,7 @@ public class Sintomas implements Serializable{
     private Integer id_sint;
     @NotBlank(message = "O nome deve ser informada")
     @Length(max = 100, message = "O nome não deve ter mais que {max} caracteres")
-    @Column(name = "nome",length = 100, nullable = false)
+    @Column(name = "nome",length = 50, nullable = false)
     private String nome;
     @NotBlank(message = "A sigla deve ser informada")
     @Length(max = 3, message = "A sigla não deve ter mais que {max} caracteres")
@@ -36,7 +36,7 @@ public class Sintomas implements Serializable{
     private String sigla;
     @NotBlank(message = "A descriçao deve ser informada")
     @Length(max = 200, message = "A descrição não deve ter mais que {max} caracteres")
-    @Column(name = "descricao",length = 200, nullable = false) 
+    @Column(name = "descricao",length = 50, nullable = false) 
     private String descricao;
     
 

@@ -5,7 +5,6 @@
  */
 package br.com.vedoy;
 
-import br.com.vedoy.modelo.Categorias;
 import br.com.vedoy.modelo.Pessoas;
 import br.com.vedoy.modelo.Tipo_Usuario;
 import java.util.Calendar;
@@ -57,7 +56,6 @@ public class Testes {
             obj.setEmail("fabio.vedoy@hotmail.com");
             obj.setT_celular("54-991169397");
             obj.setTipo(em.find(Tipo_Usuario.class, "ADMINISTRADOR"));
-            obj.setCategoria(em.find(Categorias.class, 7)); //acima de dois
             Tipo_Usuario t = em.find(Tipo_Usuario.class, "ADMINISTRADOR");
             obj.getTipos_usuario().add(t);
             em.getTransaction().begin();

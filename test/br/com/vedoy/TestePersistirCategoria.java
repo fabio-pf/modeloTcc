@@ -34,8 +34,8 @@ public class TestePersistirCategoria {
         boolean exception = false;
         try {
             Categorias obj = new Categorias();
-            obj.setNome("Teste4");
-            obj.setDescricao("Teste2");
+            obj.setNome("Eletrico");
+            obj.setDescricao("Eletrico");
             obj.setSigla("ELE");
             obj.setCota(5);
             em.getTransaction().begin();

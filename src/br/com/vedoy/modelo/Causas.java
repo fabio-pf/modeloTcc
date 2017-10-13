@@ -6,6 +6,7 @@
 package br.com.vedoy.modelo;
 
 import java.io.Serializable;
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -27,7 +28,7 @@ public class Causas implements Serializable{
     @GeneratedValue(generator = "seq_causas", strategy = GenerationType.SEQUENCE)
     private Integer id_causa;
     @NotBlank(message = "O nome deve ser informado")
-    @Length(max = 100, message = "O nome não deve ter mais que {max} caracteres")
+    @Length(max = 50, message = "O nome não deve ter mais que {max} caracteres")
     @Column(name = "nome",length = 100, nullable = false)
     private String nome;
     @NotBlank(message = "A sigla deve ser informada")
@@ -35,7 +36,7 @@ public class Causas implements Serializable{
     @Column(name = "sigla",length = 3, nullable = false) 
     private String sigla;
     @NotBlank(message = "A descriçao deve ser informada")
-    @Length(max = 200, message = "A descrição não deve ter mais que {max} caracteres")
+    @Length(max = 50, message = "A descrição não deve ter mais que {max} caracteres")
     @Column(name = "descricao",length = 200, nullable = false) 
     private String descricao;
 
@@ -75,5 +76,31 @@ public class Causas implements Serializable{
         this.id_causa = id_causa;
     }
 
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 67 * hash + Objects.hashCode(this.id_causa);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Causas other = (Causas) obj;
+        if (!Objects.equals(this.id_causa, other.id_causa)) {
+            return false;
+        }
+        return true;
+    }
+
+    
 
 }

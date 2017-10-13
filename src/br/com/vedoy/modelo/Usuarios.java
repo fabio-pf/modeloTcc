@@ -8,6 +8,7 @@ package br.com.vedoy.modelo;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ForeignKey;
@@ -38,9 +39,10 @@ public class Usuarios implements Serializable {
     @Column(name = "id")
     private Integer id;
     @NotNull(message = "O nome deve ser informado")
-    @Column(name = "usuario")
+    @Column(name = "usuario", length = 50)
     private String usuario;
     @NotNull(message = "A senha deve ser informada")
+    @Column(name = "senha", length = 50)
     private String senha;
     @NotNull(message = "A senha deve ser informada")
     @ManyToOne
@@ -99,6 +101,33 @@ public class Usuarios implements Serializable {
     public void setTipo(Tipo_Usuario tipo) {
         this.tipo = tipo;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 37 * hash + Objects.hashCode(this.id);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Usuarios other = (Usuarios) obj;
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        return true;
+    }
+    
+    
 
     
 }

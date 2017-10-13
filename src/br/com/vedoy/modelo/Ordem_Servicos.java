@@ -11,6 +11,7 @@ import java.util.Calendar;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -30,17 +31,16 @@ import javax.validation.constraints.NotNull;
  */
 @Entity
 public class Ordem_Servicos implements Serializable{
-    
     @Id
     @SequenceGenerator(name = "seq_os", sequenceName = "seq_os_id", allocationSize = 1)
     @GeneratedValue(generator = "seq_os", strategy = GenerationType.SEQUENCE)
-    private Integer id_os;
+    private Integer id;
     @NotNull(message = "O tipo não pode ser nulo")
     @ManyToOne
     @JoinColumn(name = "tipo_OS")
-    private Categorias tipo;
+    private Categorias tipo_OS;
     @NotNull(message = "A descrição não pode ser nula")
-    @Column(name = "descricao", nullable = false, columnDefinition = "text")
+    @Column(name = "descricao", nullable = false, length = 200, columnDefinition = "text")
     private String descricao_servico;
     @NotNull(message = "O produto não pode ser nulo")
     @ManyToOne
@@ -48,20 +48,19 @@ public class Ordem_Servicos implements Serializable{
     private Produtos produto;
     @NotNull(message = "A prioridade deve ser definida")
     private int prioridade;
-    
     private boolean status;
     @ManyToOne
     @NotNull(message = "Cliente não pode ser nulo")
-    @JoinColumn(name = "id_clientes")    
-    private Usuarios cliente;
+    @JoinColumn(name = "cliente") 
+    private Pessoas cliente;
     @ManyToOne
     @NotNull(message = "Técnico não pode ser nulo")
-    @JoinColumn(name = "id_tecnico")    
-    private Usuarios tecnico;
+    @JoinColumn(name = "tecnico")   
+    private Pessoas tecnico;
     @ManyToOne
     @NotNull(message = "Atendente não pode ser nulo")
-    @JoinColumn(name = "id_atendente")    
-    private Usuarios atendente;
+    @JoinColumn(name = "atendente")    
+    private Pessoas atendente;
     @NotNull(message = "Data de início não pode ser nula")
     @Temporal(TemporalType.DATE)
     @Column(name = "inicio", nullable = false)
@@ -69,24 +68,21 @@ public class Ordem_Servicos implements Serializable{
     @Temporal(TemporalType.DATE)
     @Column(name = "fim")
     private Calendar fim;
-    @Column(name = "observacoes", columnDefinition = "text")
+    @Column(name = "observacoes", columnDefinition = "text", length = 100)
     private String Observacoes;
     @ManyToOne
-    @NotNull(message = "Causa Principal não pode ser nula")
     @JoinColumn(name = "causaPrincipal")    
     private Causas causaPrincipal;
     @ManyToOne
     @NotNull(message = "Sintoma não pode ser nulo")
-    @JoinColumn(name = "sintomaPrincipal")    
+    @JoinColumn(name = "sintomaPrincipal")  
     private Sintomas sintomaPrincipal;
-    
     @ManyToMany
     @JoinTable(name = "os_sintomas",
             joinColumns
-            = @JoinColumn(name = "ordem_servicos", referencedColumnName = "id_os", nullable = false),
+            = @JoinColumn(name = "ordem_servicos", referencedColumnName = "id", nullable = false),
             inverseJoinColumns
-            = @JoinColumn(name = "sintomas", referencedColumnName = "nome", nullable = false),
-            
+            = @JoinColumn(name = "sintomas", referencedColumnName = "id_sint", nullable = false),
             uniqueConstraints = {
                 @UniqueConstraint(
                         name = "UK_os_sintomas",
@@ -96,9 +92,9 @@ public class Ordem_Servicos implements Serializable{
    @ManyToMany
     @JoinTable(name = "os_causas",
             joinColumns
-            = @JoinColumn(name = "ordem_servicos", referencedColumnName = "id_os", nullable = false),
+            = @JoinColumn(name = "ordem_servicos", referencedColumnName = "id", nullable = false),
             inverseJoinColumns
-            = @JoinColumn(name = "causas", referencedColumnName = "nome", nullable = false),
+            = @JoinColumn(name = "causas", referencedColumnName = "id_causa", nullable = false),
             uniqueConstraints = {
                 @UniqueConstraint(
                         name = "UK_os_causas",
@@ -108,20 +104,20 @@ public class Ordem_Servicos implements Serializable{
     public Ordem_Servicos() {
     }
 
-    public Integer getId_os() {
-        return id_os;
+    public Integer getId() {
+        return id;
     }
 
-    public void setId_os(Integer id_os) {
-        this.id_os = id_os;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public Categorias getTipo() {
-        return tipo;
+    public Categorias getTipo_OS() {
+        return tipo_OS;
     }
 
-    public void setTipo(Categorias tipo) {
-        this.tipo = tipo;
+    public void setTipo_OS(Categorias tipo_OS) {
+        this.tipo_OS = tipo_OS;
     }
 
     public String getDescricao_servico() {
@@ -156,27 +152,27 @@ public class Ordem_Servicos implements Serializable{
         this.status = status;
     }
 
-    public Usuarios getCliente() {
+    public Pessoas getCliente() {
         return cliente;
     }
 
-    public void setCliente(Usuarios cliente) {
+    public void setCliente(Pessoas cliente) {
         this.cliente = cliente;
     }
 
-    public Usuarios getTecnico() {
+    public Pessoas getTecnico() {
         return tecnico;
     }
 
-    public void setTecnico(Usuarios tecnico) {
+    public void setTecnico(Pessoas tecnico) {
         this.tecnico = tecnico;
     }
 
-    public Usuarios getAtendente() {
+    public Pessoas getAtendente() {
         return atendente;
     }
 
-    public void setAtendente(Usuarios atendente) {
+    public void setAtendente(Pessoas atendente) {
         this.atendente = atendente;
     }
 
