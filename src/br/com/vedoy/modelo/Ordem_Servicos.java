@@ -9,8 +9,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -24,6 +26,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 /**
  *
@@ -77,7 +81,8 @@ public class Ordem_Servicos implements Serializable{
     @NotNull(message = "Sintoma não pode ser nulo")
     @JoinColumn(name = "sintomaPrincipal")  
     private Sintomas sintomaPrincipal;
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
+    @Fetch(FetchMode.SUBSELECT)
     @JoinTable(name = "os_sintomas",
             joinColumns
             = @JoinColumn(name = "ordem_servicos", referencedColumnName = "id", nullable = false),
@@ -89,7 +94,8 @@ public class Ordem_Servicos implements Serializable{
                         columnNames = {"ORDEM_SERVICOS", "SINTOMAS"})})
     private List<Sintomas> os_sintomas = new ArrayList<>();
     
-   @ManyToMany
+    @ManyToMany(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
+    @Fetch(FetchMode.SUBSELECT)
     @JoinTable(name = "os_causas",
             joinColumns
             = @JoinColumn(name = "ordem_servicos", referencedColumnName = "id", nullable = false),

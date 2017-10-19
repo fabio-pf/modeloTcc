@@ -34,7 +34,7 @@ public class TestePersistirCategoria {
         boolean exception = false;
         try {
             Categorias obj = new Categorias();
-            obj.setNome("Eletrico");
+            obj.setNome("teste");
             obj.setDescricao("Eletrico");
             obj.setSigla("ELE");
             obj.setCota(5);
