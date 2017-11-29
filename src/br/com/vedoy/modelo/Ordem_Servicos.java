@@ -13,7 +13,6 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -58,7 +57,6 @@ public class Ordem_Servicos implements Serializable{
     @JoinColumn(name = "cliente") 
     private Pessoas cliente;
     @ManyToOne
-    @NotNull(message = "Técnico não pode ser nulo")
     @JoinColumn(name = "tecnico")   
     private Pessoas tecnico;
     @ManyToOne
@@ -108,6 +106,7 @@ public class Ordem_Servicos implements Serializable{
     private List<Causas> os_causas = new ArrayList<>();
 
     public Ordem_Servicos() {
+        
     }
 
     public Integer getId() {
